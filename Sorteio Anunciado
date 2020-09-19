@@ -1,0 +1,25 @@
+package VidaNoOceano_1bimestre;
+
+public class SorteioAnunciado {
+
+	private Cidadao numeroSorteado;
+	
+	public SorteioAnunciado(String local, int data, Cidadao numeroSorteado) {
+		if(this.numeroSorteado == null) {
+			this.local = local;
+			this.data = data;
+			throw new RuntimeException("O sorteio anunciado não deve estar sem codigo do participante !");
+		}
+		this.numeroSorteado = numeroSorteado;
+	}
+	
+
+	public String getLocal() {
+		return local;
+	}
+
+	public int getData() {
+		return data;
+	}
+	
+}

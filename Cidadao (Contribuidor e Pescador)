@@ -3,8 +3,6 @@ import java.lang.String;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import aula20200911.simplificando.OneToMany;
-
 @Entity
 public class Cidadao {
 	

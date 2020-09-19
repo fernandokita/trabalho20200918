@@ -1,0 +1,55 @@
+package VidaNoOceano_1bimestre;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@Service
+@Transaction
+public class AppSimplificando implements CommandLineRunner {
+    @Autowired
+    private SimplificandoService service;
+    EntityManager em;
+
+
+    public static void main(String[] args) {
+        SpringApplication.run(AppSimplificando.class, args).close();
+        
+        Contribuidor Fernando = new Cidadao(1, "Fernando Kitakawa", 123456, "789-654");
+        
+        Fernando.addLixo(plastico);
+        Fernando.addLixo(vidro);
+        Fernando.addLixo(papel);
+        
+        em.persist(Fernando);
+        
+        Inorganico plastico = new Lixo("saquinho mercado");
+        Inorganico vidro = new Lixo("vidro da garrafa");
+        Inorganico papel = new Lixo("folha sulfite");
+        
+        plastico.addLixo(Fernando);
+        vidro.addLixo(Fernando);
+        papel.addLixo(Fernando);
+        
+        em.persist(plastico);
+        em.persist(vidro);
+        em.persist(papel);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        service.testarPersistência();
+    }
+
+    public void testarPersistencia(EntityManager em) {
+    	try {
+    		em.createQuery("select *from Cidadao");
+    		em.createQuery("Select *from Lixo");
+    	}finally {
+    		em.close();
+    	}
+    	
+    }
+}

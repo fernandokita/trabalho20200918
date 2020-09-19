@@ -1,0 +1,104 @@
+package VidaNoOceano_1bimestre;
+
+import java.util.ArrayList;
+
+public class Lixo {
+	
+	@id
+	private long id;
+	private String nomeLixo;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private ArrayList<Cidadao> listCidadao = new ArrayList<Cidadao>();
+	
+	public Lixo() {
+		
+	}
+	
+	public Lixo(long id, String nomeLixo) {
+		this.id = id;
+		this.nomeLixo = nomeLixo;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public String getNomeLixo() {
+		return nomeLixo;
+	}
+
+	public void setNomeLixo(String nomeLixo) {
+		this.nomeLixo = nomeLixo;
+	}
+	
+	public void setCidadao(Cidadao novoCidadao) {
+		this.listCidadao.add(novoCidadao);
+	}
+	
+	public ArrayList<Cidadao> getCidadao(){
+		return listCidadao;
+	}
+
+	public void reciclar(){
+		System.out.println("\n Reciclagem de lixos !");
+	}
+
+// Herança... -----------------------------------------------
+	public class LixoOrganico extends Lixo{
+		
+		public LixoOrganico() {
+			
+		}
+		
+		public LixoOrganico(long id, String nomeLixo) {
+			super(id,nomeLixo);
+		}
+		
+		public long getId() {
+			return id;
+		}
+		
+		public String getNomeLixo() {
+			return nomeLixo;
+		}
+
+		public void setNomeLixo(String nomeLixo) {
+			this.nomeLixo = nomeLixo;
+		}
+		
+		// Reciclagem...
+		public void compostagem() {
+			System.out.println("\n Reciclagem de materiais organicos !");
+		}
+	}
+	
+//------------------------------------------------------------
+	public class LixoInorganico extends Lixo{
+		
+		public LixoInorganico() {
+			
+		}
+		
+		public LixoInorganico (long id, String nomeLixo) {
+			super(id,nomeLixo);
+		}
+		
+		public long getId() {
+			return id;
+		}
+
+		public String getNomeLixo() {
+			return nomeLixo;
+		}
+
+		public void setNomeLixo(String nomeLixo) {
+			this.nomeLixo = nomeLixo;
+		}
+		
+		// Reciclagem...
+		public void reciclarInorganico() {
+			System.out.println("\n Reciclagem de materiais inorganicos !");
+		}
+	}
+}

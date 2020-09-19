@@ -1,0 +1,145 @@
+package VidaNoOceano_1bimestre;
+import java.lang.String;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import aula20200911.simplificando.OneToMany;
+
+@Entity
+public class Cidadao {
+	
+	@Id
+	private long id;
+	
+	private String nome;
+	private int senha;
+	private String CPF;
+	
+	@OneToOne
+	private Sorteio numeroSorteio;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private ArrayList<Lixo> listLixo = new ArrayList<Lixo>();
+	
+	boolean cadastrado;
+	boolean logado;
+	
+	public Cidadao() {
+	}
+	
+	public Cidadao(long id, String nome, int senha, String CPF) {
+		this.id = id;
+		this.nome = nome;
+		this.senha = senha;
+		this.CPF = CPF;
+	}
+
+	public long getId () {
+		return id;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public int getSenha() {
+		return senha;
+	}
+
+	public void setSenha(int senha) {
+		this.senha = senha;
+	}
+
+	public String getCPF() {
+		return CPF;
+	}
+
+	public Sorteio getNumeroSorteio() {
+		return numeroSorteio;
+	}
+	
+	public void setLixo(Lixo novoLixo) {
+		this.listLixo.add(novoLixo);
+	}
+	
+	public ArrayList<Lixo> getLixo(){
+		return listLixo;
+	}
+	
+	public void cadastrar(){
+		
+	}
+	
+	public boolean logar(String CPF, String senha) {
+		
+		if(CPF || senha == false) {
+			logado = false;
+		}
+		logado = true;
+	}
+	
+	
+// Herança... -----------------------------------------------------------------
+	public class Contribuidor extends Cidadao{
+		
+		public Contribuidor(){
+			
+		}
+		
+		public Contribuidor(long id, String nome,int senha, String CPF) {
+			super(id,nome,senha,CPF);
+		}
+		
+		@Override
+		public long getId () {
+			return id;
+		}
+		@Override
+		public String getNome() {
+			return nome;
+		}
+		@Override
+		public int getSenha() {
+			return senha;
+		}
+		@Override
+		public void setSenha(int senha) {
+			this.senha = senha;
+		}
+		@Override
+		public String getCPF() {
+			return CPF;
+		}
+	}
+//-------------------------------------------------------------------------	
+	public class Pescador extends Cidadao{
+		
+		public Pescador(){
+			
+		}
+		
+		public Pescador(long id, String nome,int senha, String CPF) {
+			super(id,nome,senha,CPF);
+		}
+		@Override
+		public long getId () {
+			return id;
+		}
+		@Override
+		public String getNome() {
+			return nome;
+		}
+		@Override
+		public int getSenha() {
+			return senha;
+		}
+		@Override
+		public void setSenha(int senha) {
+			this.senha = senha;
+		}
+		@Override
+		public String getCPF() {
+			return CPF;
+		}
+	}
+}
